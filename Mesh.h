@@ -17,7 +17,7 @@ SourceFiles
 
 #pragma once
 
-#include <boost/numeric/ublas/vector.hpp>
+#include <vector>
 #include <string>
 
 #include "Point.h"
@@ -36,18 +36,24 @@ class Mesh
 private:
 
 	// Private data
+		
+		//- The total number of points in the mesh
+		int m_totalNbPoints;
+
+		//- The total number of cells in the mesh
+		int m_totalNbCells;
 	
 		//- The number of points in the mesh
-		boost::numeric::ublas::vector< int > m_nbPoints;
+		std::vector< int > m_nbPoints;
 
 		//- The number of cells in the mesh
-		boost::numeric::ublas::vector< int > m_nbCells;
+		std::vector< int > m_nbCells;
 
 		//- The list of the points in the mesh
-		boost::numeric::ublas::vector< Point* > m_points;
+		std::vector< Point* > m_points;
 
 		//- The list of the cells in the mesh
-		boost::numeric::ublas::vector< Cell* > m_cells;
+		std::vector< Cell* > m_cells;
 
 public:
 
@@ -66,6 +72,9 @@ public:
 	
 		//- Get the number of cells in the i direction
 		int getNbCells( int i );
+
+		//- Add a new point
+		void addPoint( double const& x, double const& y, double const& z );
 
 		//- Get the cell of of the given index
 		Cell* getCell( int index );

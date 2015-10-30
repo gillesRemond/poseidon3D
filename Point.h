@@ -49,7 +49,7 @@ public :
 		Point( boost::numeric::ublas::vector<double> position );
 
 		//- Construct given three doubles
-		Point( double x, double y, double z );
+		Point( double const& x, double const& y, double const& z );
 
 	// Member Functions
 

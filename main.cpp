@@ -9,6 +9,7 @@
 
 #include "constants.h"
 #include "Mesh.h"
+#include "Mesher.h"
 #include "time.h"
 
 using namespace std;
@@ -43,19 +44,6 @@ int main()
 
 	// Ask the user for some parameters
 	cout << "Welcome in the poseidon software!" << endl << endl;
-	cout << "Some parameters for setting up the mesh :" << endl;
-	cout << "The length of the rectangular :" << endl;
-	cin >> parameters.lengths[0];
-	cout << "The width of the rectangular :" << endl;
-	cin >> parameters.lengths[1];
-	cout << "The height of the rectangular :" << endl;
-	cin >> parameters.lengths[2];
-	cout << "Number of cells in the x direction :" << endl;
-	cin >> parameters.nbCells[0];
-	cout << "Number of cells in the y direction :" << endl;
-	cin >> parameters.nbCells[1];
-	cout << "Number of cells in the z direction :" << endl;
-	cin >> parameters.nbCells[2];
 	//double omega;
 	//cout << "The relaxation parameter omega :" << endl;
 	//cin >> omega;
@@ -71,9 +59,12 @@ int main()
 	top_chrono_total = top_chrono;
 
 	// Create the mesh
-	Mesh* mesh = new Mesh( parameters );
-	mesh -> generateMesh( parameters );
+	Mesher* mesher = new Mesher();
+	mesher -> readDict();
+	mesher -> generatePoints();
 
+	Mesh* mesh = mesher -> getMesh();
+	
 	// Write the mesh
 	mesh -> write();
 
@@ -81,6 +72,7 @@ int main()
 	stop_chrono_total();
 
 	// Free the memory
+	delete mesher;
 	delete mesh;
 
 	system("pause");

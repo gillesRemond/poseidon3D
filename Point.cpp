@@ -17,7 +17,7 @@ Point::Point( vector<double> position )
 	m_position = position;
 }
 
-Point::Point( double x, double y, double z )
+Point::Point( double const& x, double const& y, double const& z )
 {
 	m_position.resize( 3 );
 	m_position[ 0 ] = x;
